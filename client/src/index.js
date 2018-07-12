@@ -1,6 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { injectGlobal } from 'styled-components';
+import globalCSS from './theme/globalStyle';
 import App from './App';
 
+injectGlobal`${globalCSS}`;
+
 ReactDOM.render(<App />, document.getElementById('root'));
+
+/* eslint no-undef: "off", no-unused-expressions: "off" */
