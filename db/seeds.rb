@@ -6,3 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 AdminUser.create!(email: Figaro.env.admin_username, password: Figaro.env.admin_password, password_confirmation: Figaro.env.admin_password)
+
+difficulties = ["Easy", "Medium", "Hard"]
+difficulties.each { |level| Difficulty.create(name: level)}
