@@ -7,6 +7,8 @@ import wallyHeader from '../images/wally2.jpg';
 const Wrapper = styled.div`
   position: relative;
   height: 100vh;
+  min-height: 530px;
+  min-width: 900px;
   background: url(${wally}) no-repeat right;
   background-size: contain; 
   --width: calc(100%);
@@ -16,6 +18,7 @@ const Wrapper = styled.div`
 `;
 
 const WallyImage = styled.img`
+  float: left;
   width: 200px;
 `;
 
@@ -45,6 +48,11 @@ const BlueWally = RedWhere.extend`
   color: var(--wallyblue);
 `;
 
+const NavContainer = styled.div`
+  margin: 0 20%;
+  height: 100%;
+  padding-top: 200px;
+`;
 
 function Home(props) {
   return (
@@ -59,8 +67,10 @@ function Home(props) {
           Wally?
         </BlueWally>
       </Header>
-
       <WallyImage src={wallyHeader} alt="Where's Wally" />
+      <NavContainer>
+        {/* Nav content here */}
+      </NavContainer>
     </Wrapper>
   );
 }

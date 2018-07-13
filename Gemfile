@@ -23,6 +23,9 @@ gem 'puma', '~> 3.11'
 gem 'devise'
 gem 'activeadmin'
 
+# Fiagro for environment variables
+gem "figaro"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

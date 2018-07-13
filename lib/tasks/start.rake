@@ -1,6 +1,6 @@
 namespace :start do
   task :development do
-    Bundler.clean_exec{ exec 'heroku local -f Procfile.dev' }
+    Bundler.clean_exec 'heroku local -f Procfile.dev'
   end
 end
 
