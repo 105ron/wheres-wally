@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import wally from '../images/wally.jpg';
-import wallyHeader from '../images/wally2.jpg';
+import wally from '../images/wally.png';
+import wallyHeader from '../images/wally2.png';
 
 
 const Wrapper = styled.div`
@@ -35,7 +35,7 @@ const RedWhere = styled.span`
   top: 105px;
   left:35px
   font-family: 'Alfa Slab One', cursive;
-  text-shadow: -3px 2px 1px rgba(195, 199, 202, 0.8);
+  text-shadow: -2px 2px 1px rgba(244, 85, 58, 0.7);
   font-size: 60px;
   letter-spacing: 8px;
   color: var(--wallyred);
@@ -44,6 +44,7 @@ const RedWhere = styled.span`
 const BlueWally = RedWhere.extend`
   top: 145px;
   left: 55px;
+  text-shadow: -2px 2px 1px rgba(87, 114, 183, 0.7);
   letter-spacing: 24px;
   color: var(--wallyblue);
 `;
