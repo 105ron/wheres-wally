@@ -10,7 +10,11 @@ const Wrapper = styled.div`
   min-height: 530px;
   min-width: 900px;
   background: url(${wally}) no-repeat right;
-  background-size: contain;
+  background-size: contain; 
+  --width: calc(100%);
+  &:after {
+    content: var(--width);
+  }
 `;
 
 // Reference for the angle header RedWhere and BluWhere elements only
@@ -26,7 +30,7 @@ const RedWhere = styled.span`
   top: 105px;
   left:35px
   font-family: 'Alfa Slab One', cursive;
-  text-shadow: -2px -2px 1px rgba(244, 85, 58, 0.7);
+  text-shadow: -2px 2px 1px rgba(244, 85, 58, 0.7);
   font-size: 60px;
   letter-spacing: 8px;
   color: var(--wallyred);
@@ -35,7 +39,7 @@ const RedWhere = styled.span`
 const BlueWally = RedWhere.extend`
   top: 145px;
   left: 55px;
-  text-shadow: -2px -2px 1px rgba(87, 114, 183, 0.7);
+  text-shadow: -2px 2px 1px rgba(87, 114, 183, 0.7);
   letter-spacing: 24px;
   color: var(--wallyblue);
 `;
@@ -60,13 +64,20 @@ class Home extends Component {
 
   componentDidMount() {
     axios.get('/api/difficulties')
-      .then((difficulties) => {
-        const [...levels] = difficulties.data;
-        console.log(levels);
+      .then((levels) => {
         if (levels.length) {
           this.setState({ levels });
+          // this.getDrink(levels[0].id)
+        } else {
+          this.setState({ levels: [] });
         }
       });
+  }
+
+  fetch(endpoint) {
+    return window.fetch(endpoint)
+      .then(response => response.json())
+      .catch(error => console.log(error));
   }
 
   render() {
@@ -74,6 +85,7 @@ class Home extends Component {
     const pStyle = { textAlign: 'center' };
     return (
       <Wrapper>
+
         <Header>
           <RedWhere>
             Where&apos;s
@@ -87,7 +99,7 @@ class Home extends Component {
         <NavContainer>
           {/* Nav content here */}
           {levels.map(thing => (
-            <p key={thing.id} style={pStyle}>
+            <p style={pStyle}>
               {thing.name}
             </p>
           ))}
@@ -99,3 +111,5 @@ class Home extends Component {
 }
 
 export default Home;
+
+/* eslint class-methods-use-this: "off", no-console: "off" */
