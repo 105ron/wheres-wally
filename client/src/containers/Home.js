@@ -7,8 +7,6 @@ import wallyHeader from '../images/wally2.png';
 const Wrapper = styled.div`
   position: relative;
   height: 100vh;
-  min-height: 530px;
-  min-width: 900px;
   background: url(${wally}) no-repeat right;
   background-size: contain;
 `;
@@ -26,7 +24,7 @@ const RedWhere = styled.span`
   top: 105px;
   left:35px
   font-family: 'Alfa Slab One', cursive;
-  text-shadow: -2px -2px 1px rgba(244, 85, 58, 0.7);
+  text-shadow: -2px -2px 1px var(--redshadow);
   font-size: 60px;
   letter-spacing: 8px;
   color: var(--wallyred);
@@ -35,15 +33,56 @@ const RedWhere = styled.span`
 const BlueWally = RedWhere.extend`
   top: 145px;
   left: 55px;
-  text-shadow: -2px -2px 1px rgba(87, 114, 183, 0.7);
+  text-shadow: -2px -2px 1px var(--blueshadow);
   letter-spacing: 24px;
   color: var(--wallyblue);
 `;
 
 const NavContainer = styled.div`
-  margin: 0 20%;
-  height: 100%;
-  padding-top: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const NavLabel = styled.h2`
+  font-family: 'Varela Round', sans-serif;
+`;
+
+const DifficultyButton = styled.button`
+  position:relative;
+  width: 320px;
+  font-family: 'Alfa Slab One',cursive;
+  font-size: 16px;
+  letter-spacing: 8px;
+  text-align: center;
+  cursor: pointer;
+  padding: 25px 80px;
+  margin: 15px 30px;
+  text-transform: uppercase;
+  transition: all 0.3s;
+  background: var(--wallyblue);
+  color: #fff;
+  border-radius: 50px;
+  border: 3px solid black;
+  &:hover:before {
+    left: 80%;
+    opacity: 1;
+  }
+  &:before {
+    position: absolute;
+    line-height: 16px;
+    left: 70%;
+    opacity: 0;
+    font-size: 25px;
+    color: #fff;
+    transition: all 0.3s;
+    content: "→";
+  }
+  &:hover {
+    background: var(--blueshadow);
+  }
+
 `;
 
 class Home extends Component {
@@ -62,7 +101,6 @@ class Home extends Component {
     axios.get('/api/difficulties')
       .then((difficulties) => {
         const [...levels] = difficulties.data;
-        console.log(levels);
         if (levels.length) {
           this.setState({ levels });
         }
@@ -85,11 +123,13 @@ class Home extends Component {
         </Header>
         <img src={wallyHeader} alt="Where's Wally" height="165" width="200" />
         <NavContainer>
-          {/* Nav content here */}
+          <NavLabel>
+            Choose Your level
+          </NavLabel>
           {levels.map(thing => (
-            <p key={thing.id} style={pStyle}>
+            <DifficultyButton key={thing.id} style={pStyle}>
               {thing.name}
-            </p>
+            </DifficultyButton>
           ))}
 
         </NavContainer>
