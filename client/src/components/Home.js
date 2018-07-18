@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import axios from 'axios';
 import wally from '../images/wally.png';
@@ -94,20 +95,24 @@ const DifficultyButton = styled.button`
   `;
 
 function Buttons(props) {
-  const { levels: [ {name, id} ] } = props;
+  const { levels } = props;
   return (
     <NavContainer>
       <NavLabel>
         Choose Your level
       </NavLabel>
       {levels.map(levelObj => (
-        <DifficultyButton key={id}>
-          {name}
+        <DifficultyButton key={levelObj.id}>
+          {levelObj.name}
         </DifficultyButton>
       ))}
     </NavContainer>
   );
 }
+
+Buttons.propTypes = {
+  levels: PropTypes.array.isRequired,
+};
 
 class Home extends Component {
   constructor() {
