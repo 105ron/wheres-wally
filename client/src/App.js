@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Home from './containers/Home';
+import Home from './components/Home';
 
 const AppWrapper = styled.div`
   min-height: 570px;

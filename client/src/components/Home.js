@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import wally from '../images/wally.png';
 import wallyHeader from '../images/wally2.png';
+import Loader from '../containers/Loader';
 
 const Wrapper = styled.div`
   position: relative;
@@ -38,7 +39,14 @@ const BlueWally = RedWhere.extend`
   color: var(--wallyblue);
 `;
 
+const Image = styled.img`
+  float: left;
+`;
+
 const NavContainer = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -75,6 +83,7 @@ const DifficultyButton = styled.button`
     left: 70%;
     opacity: 0;
     font-size: 25px;
+    font-weight: bold;
     color: #fff;
     transition: all 0.3s;
     content: "→";
@@ -82,18 +91,29 @@ const DifficultyButton = styled.button`
   &:hover {
     background: var(--blueshadow);
   }
+  `;
 
-`;
+function Buttons(props) {
+  const { levels: [ {name, id} ] } = props;
+  return (
+    <NavContainer>
+      <NavLabel>
+        Choose Your level
+      </NavLabel>
+      {levels.map(levelObj => (
+        <DifficultyButton key={id}>
+          {name}
+        </DifficultyButton>
+      ))}
+    </NavContainer>
+  );
+}
 
 class Home extends Component {
   constructor() {
     super();
     this.state = {
-      levels: [
-        {
-          thing: '',
-        },
-      ],
+      levels: [],
     };
   }
 
@@ -109,7 +129,6 @@ class Home extends Component {
 
   render() {
     const { levels } = this.state;
-    const pStyle = { textAlign: 'center' };
     return (
       <Wrapper>
         <Header>
@@ -121,18 +140,11 @@ class Home extends Component {
             Wally?
           </BlueWally>
         </Header>
-        <img src={wallyHeader} alt="Where's Wally" height="165" width="200" />
-        <NavContainer>
-          <NavLabel>
-            Choose Your level
-          </NavLabel>
-          {levels.map(thing => (
-            <DifficultyButton key={thing.id} style={pStyle}>
-              {thing.name}
-            </DifficultyButton>
-          ))}
-
-        </NavContainer>
+        <Image src={wallyHeader} alt="Where's Wally" height="165" width="200" />
+        {levels.length
+          ? <Buttons levels={levels} />
+          : <Loader />
+        }
       </Wrapper>
     );
   }
