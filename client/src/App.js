@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
+import NotFound from './containers/NotFound';
 
 const AppWrapper = styled.div`
+  height: 100vh;
   min-height: 570px;
   min-width: 900px;
   background: linear-gradient(153deg, rgba(228, 229, 230, 0.5) 0%,
@@ -15,7 +18,12 @@ class App extends Component {
   render() {
     return (
       <AppWrapper>
-        <Home />
+        <Router>
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route component={NotFound} />
+          </Switch>
+        </Router>
       </AppWrapper>
     );
   }
