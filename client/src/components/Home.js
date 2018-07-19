@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import axios from 'axios';
+import { CSSTransitionGroup } from 'react-transition-group';
 import wally from '../images/wally.png';
 import wallyHeader from '../images/wally2.png';
 import Loader from '../containers/Loader';
@@ -9,6 +10,7 @@ import Loader from '../containers/Loader';
 const Wrapper = styled.div`
   position: relative;
   height: 100vh;
+  overflow: hidden;
   background: url(${wally}) no-repeat right;
   background-size: contain;
 `;
@@ -97,16 +99,16 @@ const DifficultyButton = styled.button`
 function Buttons(props) {
   const { levels } = props;
   return (
-    <NavContainer>
-      <NavLabel>
-        Choose Your level
-      </NavLabel>
-      {levels.map(levelObj => (
-        <DifficultyButton key={levelObj.id}>
-          {levelObj.name}
-        </DifficultyButton>
-      ))}
-    </NavContainer>
+      <NavContainer>
+        <NavLabel>
+          Choose Your level
+        </NavLabel>
+        {levels.map(levelObj => (
+          <DifficultyButton key={levelObj.id}>
+            {levelObj.name}
+          </DifficultyButton>
+        ))}
+      </NavContainer>
   );
 }
 
@@ -146,10 +148,16 @@ class Home extends Component {
           </BlueWally>
         </Header>
         <Image src={wallyHeader} alt="Where's Wally" height="165" width="200" />
-        {levels.length
-          ? <Buttons levels={levels} />
-          : <Loader />
-        }
+        <CSSTransitionGroup
+          transitionName="example"
+          transitionEnterTimeout={4500}
+          transitionLeaveTimeout={4300}
+        >
+          {levels.length
+            ? <Buttons levels={levels} key="1" />
+            : <Loader key="2" />
+          }
+        </CSSTransitionGroup>
       </Wrapper>
     );
   }
