@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import wally from '../images/wally.png';
 import wallyHeader from '../images/wally2.png';
 import Loader from '../containers/Loader';
@@ -58,7 +59,7 @@ const NavLabel = styled.h2`
   font-family: 'Varela Round', sans-serif;
 `;
 
-const DifficultyButton = styled.button`
+const DifficultyButton = styled(Link)`
   position:relative;
   width: 320px;
   font-family: 'Alfa Slab One',cursive;
@@ -102,7 +103,7 @@ function Buttons(props) {
         Choose Your level
       </NavLabel>
       {levels.map(levelObj => (
-        <DifficultyButton key={levelObj.id}>
+        <DifficultyButton to={`/level/${levelObj.id}`} key={levelObj.id}>
           {levelObj.name}
         </DifficultyButton>
       ))}
