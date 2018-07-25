@@ -1,11 +1,47 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 AdminUser.create!(email: Figaro.env.admin_username, password: Figaro.env.admin_password, password_confirmation: Figaro.env.admin_password)
 
-difficulties = ["Easy", "Medium", "Hard"]
-difficulties.each { |level| Difficulty.create(name: level)}
+easy = Difficulty.create(name: "Easy")
+medium = Difficulty.create(name: "Medium")
+hard = Difficulty.create(name: "Hard")
+
+def easy_games
+  [
+    {src: "fire.jpg", title: "Fire"},
+    {src: "beach.jpg", title: "Beach"},
+    {src: "market.jpg", title: "Market"}
+  ]
+end
+
+def medium_games
+  [
+    {src: "game.jpg", title: "Game"},
+    {src: "soldier.jpg", title: "Soldier"},
+    {src: "christmas.jpg", title: "Christmas"}
+  ]
+end
+
+def hard_games
+  [
+    {src: "carnival.jpg", title: "Carnival"},
+    {src: "fair.jpg", title: "Fair"},
+    {src: "gobbling-gluttons.jpg", title: "Gobbling Gluttons"}
+  ]
+end
+
+easy_games.each do |game|
+  Game.create(
+    game.merge( {difficulty: easy} )
+    )
+end
+
+medium_games.each do |game|
+  Game.create(
+    game.merge( {difficulty: medium} )
+    )
+end
+
+hard_games.each do |game|
+  Game.create(
+    game.merge( {difficulty: hard} )
+    )
+end

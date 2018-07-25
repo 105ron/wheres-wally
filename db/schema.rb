@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2018_07_23_081635) do
 
   create_table "games", force: :cascade do |t|
     t.text "src", null: false
+    t.text "title"
     t.bigint "difficulty_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

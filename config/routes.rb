@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   scope '/api' do
     resources :difficulties
+    resources :games
   end
 
   # Let React app handle all other routes
