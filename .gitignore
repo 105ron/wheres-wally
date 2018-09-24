@@ -27,3 +27,7 @@
 
 # Ignore application configuration
 /config/application.yml
+
+/client/node_modules
+/node_modules
+/client/.env

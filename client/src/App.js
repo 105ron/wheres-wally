@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from './components/Home';
-import NotFound from './containers/NotFound';
+import { Router } from '@reach/router';
+import Home from './components/Home/Home';
+import NotFound from './components/NoPage/NoPage';
 
 const AppWrapper = styled.div`
   height: 100vh;
@@ -14,21 +14,15 @@ const AppWrapper = styled.div`
                                       rgba(228, 229, 230, 0.5) 100%);
 `;
 
-class App extends Component {
-  render() {
-    return (
-      <AppWrapper>
-        <Router>
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route component={NotFound} />
-          </Switch>
-        </Router>
-      </AppWrapper>
-    );
-  }
+function app() {
+  return (
+    <AppWrapper>
+      <Router>
+        <Home path="/" exact />
+        <NotFound path="404" />
+      </Router>
+    </AppWrapper>
+  );
 }
 
-export default App;
-
-/* eslint react/prefer-stateless-function: "off" */
+export default app;
