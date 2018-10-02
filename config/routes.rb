@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   scope '/api' do
-    resources :difficulties, only: [:index]
+    get '/levels', to: 'difficulties#index'
+    get '/levels/:id', to: 'difficulties#show'
     resources :games, only: [:show]
   end
 

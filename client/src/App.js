@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Router } from '@reach/router';
-import Home from './components/Home/Home';
+import Layout from './hoc/Layout/Layout';
+import Menu from './components/UI/Menu/Menu';
+import MenuFromApi from './containers/MenuFromApi/MenuFromApi';
 import NotFound from './components/NoPage/NoPage';
 
 const AppWrapper = styled.div`
@@ -17,10 +19,15 @@ const AppWrapper = styled.div`
 function app() {
   return (
     <AppWrapper>
-      <Router>
-        <Home path="/" exact />
-        <NotFound path="404" />
-      </Router>
+      <Layout>
+        <Router>
+          <Menu path="/" />
+          <MenuFromApi path="levels" />
+          <MenuFromApi path="levels/:slug" />
+          <MenuFromApi path="games/:slug" />
+          <NotFound default />
+        </Router>
+      </Layout>
     </AppWrapper>
   );
 }

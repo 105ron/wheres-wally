@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const DifficultyButton = styled(Link)`
   position: relative;
   width: 320px;
-  font-family: 'Alfa Slab One',cursive;
+  font-family: 'Alfa Slab One', cursive;
   font-size: 16px;
   letter-spacing: 8px;
   text-align: center;
@@ -39,16 +39,33 @@ const DifficultyButton = styled(Link)`
   }
 `;
 
+const LastLetter = styled.span`
+  font-family: 'Alfa Slab One', cursive;
+  font-size: 16px;
+  letter-spacing: 0px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.3s;
+  background: transparent;
+  color: #fff;
+`;
+
 function button(props) {
-  const { slug, name } = props;
+  const { changeMenu, slug, name } = props;
+  const slicedName = name.slice(0, -1);
+  const lastLetter = name.slice(-1);
   return (
-    <DifficultyButton to={`/level/${slug}`} key={slug}>
-      {name}
+    <DifficultyButton to={slug} onClick={changeMenu}>
+      {slicedName}
+      <LastLetter>
+        {lastLetter}
+      </LastLetter>
     </DifficultyButton>
   );
 }
 
 button.propTypes = {
+  changeMenu: PropTypes.func.isRequired,
   slug: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 };

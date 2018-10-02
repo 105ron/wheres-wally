@@ -1,4 +1,4 @@
-const globalCSS = `
+export const globalCSS = `
   @import url('https://fonts.googleapis.com/css?family=Alfa+Slab+One');
   @import url('https://fonts.googleapis.com/css?family=Varela+Round');
   body {
@@ -17,5 +17,3 @@ const globalCSS = `
     box-sizing: inherit;
   }
 `;
-
-export default globalCSS;
