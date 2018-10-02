@@ -1,3 +1,4 @@
+// eslint-config-airbnb@17.1.0" has incorrect peer dependency "eslint-plugin-jsx-a11y@^6.1.1"
 import React, { Component } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -14,6 +15,8 @@ const NavContainer = styled.div`
   align-items: center;
 `;
 
+// eslint-config-airbnb@17.1.0" has incorrect peer dependency "eslint-plugin-jsx-a11y@^6.1.1"
+
 const NavLabel = styled.h2`
   font-family: 'Varela Round', sans-serif;
 `;
@@ -22,40 +25,48 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      levels: [],
+      buttonData: [],
+      title: '',
     };
   }
 
   componentDidMount() {
     axios.get('/api/difficulties')
       .then((difficulties) => {
-        const [...levels] = difficulties.data;
-        if (levels.length) {
-          this.setState({ levels });
+        const { title, buttonData } = difficulties.data;
+        if (buttonData.length) {
+          this.setState({
+            buttonData,
+            title,
+          });
         }
       });
   }
 
   render() {
-    const { levels } = this.state;
+    const { buttonData, title } = this.state;
     let component = <Loader />;
-    if (levels.length) {
-      component = levels.map((level) => {
-        const { id: slug, name } = level;
-        return (
-          <Button
-            slug={slug}
-            key={slug}
-            name={name}
-          />
-        );
-      });
+    if (buttonData.length) {
+      component = (
+        <React.Fragment>
+          <NavLabel>
+            {title}
+          </NavLabel>
+          {buttonData.map((level) => {
+            const { id, label: name, url } = level;
+            return (
+              <Button
+                key={id}
+                slug={url}
+                name={name}
+              />
+            );
+          })}
+        </React.Fragment>
+      );
     }
     return (
       <NavContainer>
-        <NavLabel>
-          Choose Your level
-        </NavLabel>
         {component}
       </NavContainer>
     );

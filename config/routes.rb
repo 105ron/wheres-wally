@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   scope '/api' do
-    resources :difficulties
-    resources :games
+    resources :difficulties, only: [:index]
+    resources :games, only: [:show]
   end
 
   # Let React app handle all other routes

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import wally from '../../assets/images/wally.png';
@@ -30,7 +30,7 @@ const RedWhere = styled.span`
   color: var(--wallyred);
 `;
 
-const BlueWally = RedWhere.extend`
+const BlueWally = styled(RedWhere)`
   top: 145px;
   left: 55px;
   text-shadow: -2px -2px 1px var(--blueshadow);

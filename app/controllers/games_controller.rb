@@ -1,6 +1,7 @@
 class GamesController < ApiController
-  def index
-    @games = Game.all
-    render json: @games.to_json
+
+  def show
+    @game = Game.joins(:difficulty).where(:difficulties => {:slug => params[:id]})
+    render json: @game.to_json
   end
 end
